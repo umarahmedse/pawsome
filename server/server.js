@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import http from "http"; // Import http module
 import app from "../server/index.js";
-import { error } from "console";
 dotenv.config();
 
 mongoose
