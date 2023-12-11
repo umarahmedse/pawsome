@@ -11,6 +11,7 @@ import cookieParser from "cookie-parser";
 import hpp from "hpp";
 import rateLimit from "express-rate-limit";
 import globalErrorHandler from "./utils/errorHandler.js";
+import petRoutes from "./routes/petRoutes.js";
 const limiter = rateLimit({
   max: 100, // Maximum requests per windowMs
   windowMs: 60 * 60 * 1000,
@@ -31,7 +32,7 @@ app.use(ExpressMongoSanitize());
 app.use(xss());
 app.use(hpp());
 /* ROUTES */
-
+app.use("/pets", petRoutes);
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
