@@ -11,11 +11,11 @@ import cookieParser from "cookie-parser";
 import hpp from "hpp";
 import rateLimit from "express-rate-limit";
 import globalErrorHandler from "./utils/globalErrorHandler.js";
-// const limiter = rateLimit({
-//   max: 100, // Maximum requests per windowMs
-//   windowMs: 60 * 60 * 1000,
-//   message: "Too many request from this IP - Please try again in an hour",
-// });
+const limiter = rateLimit({
+  max: 100, // Maximum requests per windowMs
+  windowMs: 60 * 60 * 1000,
+  message: "Too many request from this IP - Please try again in an hour",
+});
 
 dotenv.config();
 const app = express();
