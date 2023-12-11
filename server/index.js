@@ -10,7 +10,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import hpp from "hpp";
 import rateLimit from "express-rate-limit";
-import globalErrorHandler from "./utils/globalErrorHandler.js";
+import globalErrorHandler from "./utils/errorHandler.js";
 const limiter = rateLimit({
   max: 100, // Maximum requests per windowMs
   windowMs: 60 * 60 * 1000,

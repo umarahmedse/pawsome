@@ -2,20 +2,18 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import http from "http"; // Import http module
 import app from "../server/index.js";
+import { error } from "console";
 dotenv.config();
 
 mongoose
-  .connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-  })
+  .connect(process.env.MONGO_URL)
   .then(() => {
     console.log("DB connection successful!");
-  });
+  })
+  .catch((error) => console.log(error.message));
 
 const port = process.env.PORT || 3000;
 const server = http.createServer(app); // Create an http server
-
-const io = new Server(server); // Create a socket.io instance
 
 server.listen(port, () => {
   console.log(`App running on port ${port}...`);
