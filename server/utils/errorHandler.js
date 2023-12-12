@@ -1,4 +1,6 @@
+import dotenv from "dotenv";
 import AppError from "./appError.js";
+dotenv.config();
 const handleCastErrorDB = (err) => {
   const message = `Invalid ${err.path}: ${err.value}.`;
   return new AppError(message, 400);
@@ -54,12 +56,13 @@ const sendErrorProd = (err, req, res) => {
 };
 
 export default (err, req, res, next) => {
+  console.log(process.env.NODE_ENVIRONMENT);
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
 
-  if (process.env.NODE_ENVIRONEMT === "development") {
+  if (process.env.NODE_ENVIRONMENT === "development") {
     sendErrorDev(err, req, res);
-  } else if (process.env.NODE_ENVIRONEMT === "production") {
+  } else if (process.env.NODE_ENVIRONMENT === "production") {
     let error = { ...err };
     error.name = err.name;
     error.message = err.message;
